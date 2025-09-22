@@ -1,0 +1,60 @@
+:root {
+    color-scheme: dark;
+}
+
+html,
+body {
+    background: #000;
+}
+
+main.container {
+    padding-top: 1.25rem;
+    padding-bottom: 2rem;
+}
+
+header {
+    margin: 0 0 1rem;
+}
+
+header h1 {
+    font-weight: 700;
+    letter-spacing: .2px;
+}
+
+/* Shared helpers */
+.muted {
+    color: rgba(255, 255, 255, .6);
+}
+
+.stack>*+* {
+    margin-top: .75rem;
+}
+
+/* Filter bar baseline */
+header+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: .75rem 0 1.25rem;
+    padding-bottom: .75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .06);
+}
+
+/* Footer */
+.site-footer {
+    margin: 2rem 0 1rem;
+    color: rgba(255, 255, 255, .55);
+    font-size: .9rem;
+    text-align: center;
+}
+
+/* Form controls dark tweaks */
+.filter-bar label {
+    color: rgba(255, 255, 255, .8);
+}
+
+select {
+    background: rgba(255, 255, 255, .04);
+    border: 1px solid rgba(255, 255, 255, .14);
+    color: #fff;
+}

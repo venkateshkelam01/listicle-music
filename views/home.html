@@ -1,8 +1,17 @@
-<header>
-    <h1>Discover Local Music</h1>
-    <p class="muted">Browse upcoming events in the South Bay.</p>
-</header>
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-copy">
+            <h1>Discover Local Music</h1>
+            <p class="muted">For those who love live sets, open mics, and late-night DJs 🎶</p>
+        </div>
 
+        <!-- Right-side button -->
+        <a href="/" id="allCats" class="btn-elevated primary">ALL CATEGORIES</a>
+    </div>
+</section>
+
+<!-- FILTER + CARDS -->
 <form id="filterForm" class="filter-bar">
     <label for="genre">Filter by genre</label>
     <select id="genre" name="genre">
@@ -23,5 +32,15 @@
             const genres = card.dataset.genres.split('|');
             card.style.display = !value || genres.includes(value) ? '' : 'none';
         });
+    });
+
+    // "ALL CATEGORIES" clears filter and scrolls to cards
+    const allBtn = document.getElementById('allCats');
+    allBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        sel.value = "";
+        sel.dispatchEvent(new Event('change'));
+        const cards = document.querySelector('.cards');
+        if (cards) window.scrollTo({ top: cards.offsetTop - 16, behavior: 'smooth' });
     });
 </script>

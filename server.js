@@ -21,8 +21,10 @@ const detailTmpl = tmpl("detail.html");
 function render(html, data = {}) {
     return html.replace(/\{\{(\w+)\}\}/g, (_, key) => (data[key] ?? ""));
 }
-const page = ({ title, description = "", body }) =>
-    render(layoutTmpl, { title, description, body });
+
+// NOTE: now supports pageStyles for per-page CSS injection
+const page = ({ title, description = "", body, pageStyles = "" }) =>
+    render(layoutTmpl, { title, description, body, pageStyles });
 
 const fmtCurrency = (n) => (Number(n) === 0 ? "Free" : `$${Number(n).toFixed(2)}`);
 const fmtDate = (iso) =>
@@ -33,9 +35,10 @@ app.get("/", (_req, res) => {
     const allGenres = [...new Set(events.flatMap((e) => e.genre))].sort();
     const genreOptions = allGenres.map((g) => `<option value="${g}">${g}</option>`).join("");
 
-    const cards = events.map((e) => {
-        const genres = e.genre.map((g) => `<span class="chip">${g}</span>`).join(" ");
-        return `
+    const cards = events
+        .map((e) => {
+            const genres = e.genre.map((g) => `<span class="chip">${g}</span>`).join(" ");
+            return `
       <article data-genres="${e.genre.join("|")}">
         <img class="card-img" src="${e.image}" alt="${e.name}">
         <div class="content">
@@ -46,13 +49,21 @@ app.get("/", (_req, res) => {
         </div>
         <footer>
           <small>From ${fmtCurrency(e.ticketPrice)}</small>
-          <a role="button" href="/events/${e.slug}">View details</a>
+          <a role="button" class="btn-elevated primary" href="/events/${e.slug}">View details</a>
         </footer>
       </article>`;
-    }).join("");
+        })
+        .join("");
 
     const body = render(homeTmpl, { genreOptions, cards });
-    res.send(page({ title: "Discover Local Music", body }));
+
+    res.send(
+        page({
+            title: "Discover Local Music",
+            body,
+            pageStyles: '<link rel="stylesheet" href="/css/home.css">'
+        })
+    );
 });
 
 // Detail
@@ -75,7 +86,14 @@ app.get("/events/:slug", (req, res, next) => {
         submittedOn: ev.submittedOn
     });
 
-    res.send(page({ title: ev.name, description: ev.description, body }));
+    res.send(
+        page({
+            title: ev.name,
+            description: ev.description,
+            body,
+            pageStyles: '<link rel="stylesheet" href="/css/detail.css">'
+        })
+    );
 });
 
 // 404
@@ -83,11 +101,16 @@ app.use((_req, res) => {
     const body = `
     <section style="text-align:center">
       <img src="/404.svg" alt="Not found" style="max-width:320px;width:100%;margin:1rem auto;"/>
-      <h2>404 · Page not found</h2>
-      <p class="muted">The page you’re looking for doesn’t exist.</p>
-      <p><a href="/">Go home</a></p>
+    
+      <p><a href="/" class="btn-elevated">Go home</a></p>
     </section>`;
-    res.status(404).send(page({ title: "Not found", body }));
+    res.status(404).send(
+        page({
+            title: "Not found",
+            body,
+            pageStyles: '<link rel="stylesheet" href="/css/base.css">' 
+        })
+    );
 });
 
 app.listen(PORT, () => {

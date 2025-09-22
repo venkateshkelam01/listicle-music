@@ -68,6 +68,108 @@ const events = [
         description: "Bass-forward club night with local DJs. 21+ with ID.",
         submittedBy: "rsvp-bot",
         submittedOn: "2025-09-09"
+    },
+
+    {
+        id: "evt-006",
+        slug: "santana-row-sessions-2025-10-06",
+        name: "Santana Row Sessions",
+        artists: ["Row House Band"],
+        dateTime: "2025-10-06T18:00:00",
+        venue: "Santana Row Plaza, San Jose",
+        genre: ["Pop", "Acoustic"],
+        ticketPrice: 0,
+        image: "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?q=80&w=1600&auto=format&fit=crop",
+        description: "Outdoor acoustic sets with patio vibes. Family friendly.",
+        submittedBy: "events-team",
+        submittedOn: "2025-09-12"
+    },
+   
+    {
+        id: "evt-008",
+        slug: "cupertino-philharmonic-2025-10-12",
+        name: "Cupertino Philharmonic Night",
+        artists: ["Cupertino Philharmonic"],
+        dateTime: "2025-10-12T19:30:00",
+        venue: "Quinlan Center, Cupertino",
+        genre: ["Classical"],
+        ticketPrice: 30,
+        image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop",
+        description: "A program of film scores and late-romantic favorites.",
+        submittedBy: "maria",
+        submittedOn: "2025-09-14"
+    },
+    {
+        id: "evt-009",
+        slug: "sunset-raves-2025-10-10",
+        name: "Sunset Raves",
+        artists: ["DJ Solace", "Neon Vale"],
+        dateTime: "2025-10-10T20:30:00",
+        venue: "Pier 30, San Francisco",
+        genre: ["EDM", "Trance"],
+        ticketPrice: 28,
+        image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1600&auto=format&fit=crop",
+        description: "Harbor lights + big-room trance until late.",
+        submittedBy: "sf-nightlife",
+        submittedOn: "2025-09-11"
+    },
+    {
+        id: "evt-010",
+        slug: "oakland-soul-cypher-2025-10-07",
+        name: "Oakland Soul Cypher",
+        artists: ["Bay Soul Collective"],
+        dateTime: "2025-10-07T20:00:00",
+        venue: "The New Parish, Oakland",
+        genre: ["Soul", "R&B"],
+        ticketPrice: 22,
+        image: "https://images.unsplash.com/photo-1519999482648-25049ddd37b1?q=80&w=1600&auto=format&fit=crop",
+        description: "Rotating vocalists and a tight house band—standby lines expected.",
+        submittedBy: "jamal",
+        submittedOn: "2025-09-13"
+    },
+    {
+        id: "evt-011",
+        slug: "berkeley-folk-fest-2025-10-13",
+        name: "Berkeley Folk Fest",
+        artists: ["Hills & Hollows", "Cedar Lane"],
+        dateTime: "2025-10-13T17:00:00",
+        venue: "Civic Center Park, Berkeley",
+        genre: ["Folk", "Bluegrass"],
+        ticketPrice: 15,
+        image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop",
+        description: "Picnic blankets, harmonies, and fiddle breaks at dusk.",
+        submittedBy: "bfest",
+        submittedOn: "2025-09-07"
+    },
+    
+
+    {
+        id: "evt-014",
+        slug: "silicon-valley-hiphop-2025-10-17",
+        name: "Silicon Valley Hip-Hop Night",
+        artists: ["ByteBeats", "Stack Trace"],
+        dateTime: "2025-10-17T21:00:00",
+        venue: "LVL 2, San Jose",
+        genre: ["Hip-Hop"],
+        ticketPrice: 18,
+        image: "https://images.unsplash.com/photo-1526476148966-98bd039463ea?q=80&w=1600&auto=format&fit=crop",
+        description: "Local MCs with live beat sets—ID required after 9 PM.",
+        submittedBy: "lvl2-team",
+        submittedOn: "2025-09-19"
+    },
+    {
+        id: "evt-015",
+        slug: "palo-alto-chillout-2025-10-18",
+        name: "Palo Alto Chillout",
+        artists: ["Echo Garden"],
+        dateTime: "2025-10-18T19:15:00",
+        venue: "Lytton Plaza, Palo Alto",
+        genre: ["Ambient", "Lo-Fi"],
+        ticketPrice: 10,
+        image: "https://images.unsplash.com/photo-1483412033650-1015ddeb83d1?q=80&w=1600&auto=format&fit=crop",
+        description: "Projector visuals + slow-bloom synths for an easy evening.",
+        submittedBy: "paloalto-arts",
+        submittedOn: "2025-09-18"
     }
 ];
 

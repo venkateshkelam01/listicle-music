@@ -1,0 +1,115 @@
+:root {
+    --hero-image: url('/img/hero.jpg');
+    --hero-fallback: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2400&auto=format&fit=crop');
+}
+
+.hero {
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    background:
+        linear-gradient(180deg, rgba(0, 0, 0, .65), rgba(0, 0, 0, .65)),
+        var(--hero-image), var(--hero-fallback);
+    background-size: cover;
+    background-position: center;
+    min-height: 320px;
+    display: flex;
+    align-items: flex-end;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.hero-inner {
+    width: min(1200px, 92vw);
+    margin: 0 auto;
+    padding: 2.25rem 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.hero-copy h1 {
+    font-size: clamp(2rem, 4.8vw, 3.5rem);
+    line-height: 1.05;
+    margin: 0 0 .25rem 0;
+}
+
+.hero-copy p {
+    margin: 0;
+    max-width: 60ch;
+}
+
+
+#allCats {
+    align-self: flex-start;
+    letter-spacing: .06em;
+}
+
+.filter-bar {
+    margin-top: 1.25rem;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+@media (max-width: 1024px) {
+    .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cards>article {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .01));
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+.cards>article:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, .35);
+    border-color: rgba(255, 255, 255, .14);
+}
+
+.card-img {
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    width: 100%;
+    display: block;
+}
+
+.cards>article .content {
+    flex: 1;
+    padding: 1rem 1rem .5rem;
+}
+
+.cards>article h3 {
+    margin: .25rem 0 .35rem;
+}
+
+.cards>article footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .75rem 1rem 1rem;
+    gap: 1rem;
+}
+
+.cards>article footer small {
+    color: rgba(255, 255, 255, .75);
+    font-weight: 600;
+}

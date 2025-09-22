@@ -6,15 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{title}}</title>
     <meta name="description" content="{{description}}">
+    <!-- Pico -->
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
-    <link rel="stylesheet" href="/styles.css">
+    <!-- Global + components -->
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <!-- Page-specific styles injected by server -->
+    {{pageStyles}}
 </head>
 
 <body>
     <main class="container">
         {{body}}
         <footer class="site-footer">
-            
+            Built for Week 1 · Listicle · Vanilla HTML/CSS/JS + Express + Pico.css
         </footer>
     </main>
 </body>
