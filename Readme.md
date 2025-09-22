@@ -1,8 +1,8 @@
-# WEB103 Project 1 - *Name of App Here*
+# WEB103 Project 1 - *SoundScout*
 
 Submitted by: **Venkatesh Kelam**
 
-About this web app: **App description here**
+About this web app: **SoundScout** helps students discover local live music—open mics, indie shows, jazz nights, and club DJs—around the South Bay / Bay Area. Browse event cards on the home page, filter by genre, and click into a dedicated detail page for full info (artists, venue, date/time, ticket price, etc.). Built with **vanilla HTML/CSS/JS** on an **Express** server and styled with **Pico.css**.
 
 Time spent: **5** hours
 

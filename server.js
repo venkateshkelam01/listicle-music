@@ -59,7 +59,7 @@ app.get("/", (_req, res) => {
 
     res.send(
         page({
-            title: "Discover Local Music",
+            title: "SoundScout: Local Live Music",
             body,
             pageStyles: '<link rel="stylesheet" href="/css/home.css">'
         })
