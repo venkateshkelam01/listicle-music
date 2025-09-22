@@ -1,0 +1,286 @@
+/* ===== Global dark look ===== */
+:root {
+    color-scheme: dark;
+}
+
+html,
+body {
+    background: #000;
+    /* true black */
+}
+
+main.container {
+    padding-top: 1.25rem;
+    padding-bottom: 2rem;
+}
+
+/* Headings + subtle divider */
+header {
+    margin: 0 0 1rem;
+}
+
+header h1 {
+    font-weight: 700;
+    letter-spacing: .2px;
+}
+
+header+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: .75rem 0 1.25rem;
+    padding-bottom: .75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .06);
+}
+
+/* ===== Cards grid: exactly 3 per row on desktop, wraps for extra ===== */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+/* 2-up on medium screens */
+@media (max-width: 1024px) {
+    .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* 1-up on small screens */
+@media (max-width: 640px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Card look ===== */
+.cards>article {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .01));
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 16px;
+    padding: 0;
+    /* we’ll pad interior content instead */
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+.cards>article:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, .35);
+    border-color: rgba(255, 255, 255, .14);
+}
+
+.card-img {
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    width: 100%;
+    display: block;
+}
+
+.cards>article .content {
+    flex: 1;
+    padding: 1rem 1rem .5rem;
+}
+
+.cards>article h3 {
+    margin: .25rem 0 .35rem;
+}
+
+.muted {
+    color: rgba(255, 255, 255, .6);
+}
+
+.stack>*+* {
+    margin-top: .75rem;
+}
+
+.chip {
+    font-size: .8rem;
+    padding: .2rem .5rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, .18);
+    color: rgba(255, 255, 255, .85);
+    display: inline-block;
+    background: rgba(255, 255, 255, .06);
+    margin-right: .35rem;
+}
+
+.cards>article footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .75rem 1rem 1rem;
+    gap: 1rem;
+}
+
+/* Make card footer link look like the elevated button */
+.cards>article footer a[role="button"] {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .6rem .9rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, .14);
+    background: rgba(255, 255, 255, .06);
+    color: #fff !important;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .25);
+    font-weight: 600;
+    transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
+}
+
+.cards>article footer a[role="button"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .35);
+    border-color: rgba(255, 255, 255, .22);
+    background: rgba(255, 255, 255, .09);
+}
+
+/* optional: give it the “primary” vibe like on detail page */
+.cards>article footer a[role="button"].primary {
+    border-color: rgba(255, 255, 255, .25);
+    background: linear-gradient(180deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .06));
+}
+
+.cards>article footer small {
+    color: rgba(255, 255, 255, .75);
+    font-weight: 600;
+}
+
+/* Buttons / links pop a bit more on black */
+a[role="button"],
+button,
+input[type="submit"] {
+    font-weight: 600;
+}
+
+/* Select / form on dark */
+.filter-bar label {
+    color: rgba(255, 255, 255, .8);
+}
+
+select {
+    background: rgba(255, 255, 255, .04);
+    border: 1px solid rgba(255, 255, 255, .14);
+    color: #fff;
+}
+
+/* Footer */
+.site-footer {
+    margin: 2rem 0 1rem;
+    color: rgba(255, 255, 255, .55);
+    font-size: .9rem;
+    text-align: center;
+}
+
+/* Detail page spacing
+article.stack {
+    background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .01));
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+}
+
+nav.muted a {
+    color: rgba(255, 255, 255, .75);
+} */
+
+/* ===== Detail page layout ===== */
+.detail-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .01));
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* single column on small screens */
+    gap: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+    .detail-grid {
+        grid-template-columns: 1fr 1.2fr;
+        /* image left, details right */
+        align-items: start;
+    }
+}
+
+/* ===== Responsive image constraints ===== */
+/* Never exceed 650x750px on large screens, but scale down on small screens */
+.detail-media {
+    display: flex;
+    justify-content: center;
+}
+
+.detail-img {
+    width: min(100%, 650px);
+    max-height: 750px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .35);
+    border: 1px solid rgba(255, 255, 255, .08);
+    object-fit: cover;
+    /* keeps it tidy if source is huge */
+}
+
+/* Content spacing */
+.detail-content h1 {
+    margin-top: .25rem;
+}
+
+.detail-description {
+    margin-top: .5rem;
+}
+
+/* ===== Elevated buttons ===== */
+.btn-elevated {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .6rem .9rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, .14);
+    background: rgba(255, 255, 255, .06);
+    color: #fff !important;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .25);
+    transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
+}
+
+.btn-elevated:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .35);
+    border-color: rgba(255, 255, 255, .22);
+    background: rgba(255, 255, 255, .09);
+}
+
+.btn-elevated.primary {
+    border-color: rgba(255, 255, 255, .25);
+    background: linear-gradient(180deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .06));
+}
+
+/* Put actions on a tidy row */
+.detail-actions {
+    display: flex;
+    gap: .6rem;
+    margin: .75rem 0 0;
+}
+
+/* Back link styling in nav */
+nav.muted {
+    margin-bottom: .75rem;
+}
+
+nav.muted .btn-elevated {
+    font-weight: 600;
+}

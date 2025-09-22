@@ -1,0 +1,36 @@
+<nav class="muted">
+    <a href="/" class="btn-elevated">← All events</a>
+</nav>
+
+<article class="detail-card">
+    <div class="detail-grid">
+        <figure class="detail-media">
+            <img class="detail-img" src="{{image}}" alt="{{name}}">
+        </figure>
+
+        <div class="detail-content">
+            <h1>{{name}}</h1>
+            <p><strong>Artists:</strong> {{artists}}</p>
+            <p><strong>Date & Time:</strong> {{dateTime}}</p>
+            <p><strong>Venue:</strong> {{venue}}</p>
+            <p><strong>Genre:</strong> {{genre}}</p>
+            <p><strong>Ticket:</strong> {{ticket}}</p>
+            <p class="detail-description">{{description}}</p>
+
+            <div class="detail-actions">
+                <a role="button" class="btn-elevated primary" href="/">Back to events</a>
+                <!-- Example secondary action (optional):
+        <a role="button" class="btn-elevated" href="#tickets">Get tickets</a>
+        -->
+            </div>
+
+            <details class="detail-meta">
+                <summary class="muted">Meta</summary>
+                <p><strong>ID:</strong> {{id}}</p>
+                <p><strong>Slug:</strong> {{slug}}</p>
+                <p><strong>Submitted By:</strong> {{submittedBy}}</p>
+                <p><strong>Submitted On:</strong> {{submittedOn}}</p>
+            </details>
+        </div>
+    </div>
+</article>
