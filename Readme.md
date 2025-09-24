@@ -36,7 +36,7 @@ Here's a walkthrough of implemented required features:
 
 
 Video created with **loom**
-https://www.loom.com/share/9dfcd092618248a59ad94328679e8cd0?sid=77256529-e295-42dd-8e1d-e5792b7761fa
+https://www.loom.com/share/11fe1bb992134dd4b363b6f782cbe418
 
 
 ## License
