@@ -21,26 +21,5 @@
 </form>
 
 <section class="cards">
-    {{cards}}
+    {{list}}
 </section>
-
-<script>
-    const sel = document.getElementById('genre');
-    sel.addEventListener('change', () => {
-        const value = sel.value;
-        document.querySelectorAll('[data-genres]').forEach(card => {
-            const genres = card.dataset.genres.split('|');
-            card.style.display = !value || genres.includes(value) ? '' : 'none';
-        });
-    });
-
-    // "ALL CATEGORIES" clears filter and scrolls to cards
-    const allBtn = document.getElementById('allCats');
-    allBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        sel.value = "";
-        sel.dispatchEvent(new Event('change'));
-        const cards = document.querySelector('.cards');
-        if (cards) window.scrollTo({ top: cards.offsetTop - 16, behavior: 'smooth' });
-    });
-</script>
