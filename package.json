@@ -1,15 +1,21 @@
 {
   "name": "listicle-music",
   "version": "1.0.0",
-  "main": "server.js",
-  "type": "module",
+  "main": "server.cjs",
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon server.cjs",
+    "start": "node server.cjs",
+    "db:create": "psql $DATABASE_URL -f db/schema.sql",
+    "db:seed": "psql $DATABASE_URL -f db/seed.sql",
+    "db:reset": "npm run db:create && npm run db:seed"
   },
   "dependencies": {
+    "dotenv": "^16.1.4",
     "express": "^5.1.0",
+    "pg": "^8.10.0"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^10.0.0",
     "nodemon": "^3.1.10"
   }
 }
