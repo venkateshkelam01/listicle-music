@@ -1,137 +1,54 @@
-// import express from "express";
-// import path from "path";
-// import fs from "fs";
-// import events from "./data/events.js";
-// import { fileURLToPath } from "url";
-
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-
-// const app = express();
-// const PORT = process.env.PORT || 3000;
-
-// app.use(express.static(path.join(__dirname, "public")));
-
-// const tmpl = (name) => fs.readFileSync(path.join(__dirname, "views", name), "utf8");
-// const layoutTmpl = tmpl("layout.html");
-// const homeTmpl = tmpl("home.html");
-// const detailTmpl = tmpl("detail.html");
-
-// // super-lightweight string renderer: {{key}} replacements
-// function render(html, data = {}) {
-//     return html.replace(/\{\{(\w+)\}\}/g, (_, key) => (data[key] ?? ""));
-// }
-
-// // NOTE: now supports pageStyles for per-page CSS injection
-// const page = ({ title, description = "", body, pageStyles = "" }) =>
-//     render(layoutTmpl, { title, description, body, pageStyles });
-
-// const fmtCurrency = (n) => (Number(n) === 0 ? "Free" : `$${Number(n).toFixed(2)}`);
-// const fmtDate = (iso) =>
-//     new Date(iso).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" });
-
-// // Home
-// app.get("/", (_req, res) => {
-//     const allGenres = [...new Set(events.flatMap((e) => e.genre))].sort();
-//     const genreOptions = allGenres.map((g) => `<option value="${g}">${g}</option>`).join("");
-
-//     const cards = events
-//         .map((e) => {
-//             const genres = e.genre.map((g) => `<span class="chip">${g}</span>`).join(" ");
-//             return `
-//       <article data-genres="${e.genre.join("|")}">
-//         <img class="card-img" src="${e.image}" alt="${e.name}">
-//         <div class="content">
-//           <h3>${e.name}</h3>
-//           <p class="muted">${e.venue} · ${fmtDate(e.dateTime)}</p>
-//           <p>${e.description}</p>
-//           <p>${genres}</p>
-//         </div>
-//         <footer>
-//           <small>From ${fmtCurrency(e.ticketPrice)}</small>
-//           <a role="button" class="btn-elevated primary" href="/events/${e.slug}">View details</a>
-//         </footer>
-//       </article>`;
-//         })
-//         .join("");
-
-//     const body = render(homeTmpl, { genreOptions, cards });
-
-//     res.send(
-//         page({
-//             title: "SoundScout: Local Live Music",
-//             body,
-//             pageStyles: '<link rel="stylesheet" href="/css/home.css">'
-//         })
-//     );
-// });
-
-// // Detail
-// app.get("/events/:slug", (req, res, next) => {
-//     const ev = events.find((e) => e.slug === req.params.slug);
-//     if (!ev) return next();
-
-//     const body = render(detailTmpl, {
-//         image: ev.image,
-//         name: ev.name,
-//         artists: ev.artists.join(", "),
-//         dateTime: fmtDate(ev.dateTime),
-//         venue: ev.venue,
-//         genre: ev.genre.join(", "),
-//         ticket: fmtCurrency(ev.ticketPrice),
-//         description: ev.description,
-//         id: ev.id,
-//         slug: ev.slug,
-//         submittedBy: ev.submittedBy,
-//         submittedOn: ev.submittedOn
-//     });
-
-//     res.send(
-//         page({
-//             title: ev.name,
-//             description: ev.description,
-//             body,
-//             pageStyles: '<link rel="stylesheet" href="/css/detail.css">'
-//         })
-//     );
-// });
-
-// // 404
-// app.use((_req, res) => {
-//     const body = `
-//     <section style="text-align:center">
-//       <img src="/404.svg" alt="Not found" style="max-width:320px;width:100%;margin:1rem auto;"/>
-    
-//       <p><a href="/" class="btn-elevated">Go home</a></p>
-//     </section>`;
-//     res.status(404).send(
-//         page({
-//             title: "Not found",
-//             body,
-//             pageStyles: '<link rel="stylesheet" href="/css/base.css">' 
-//         })
-//     );
-// });
-
-// app.listen(PORT, () => {
-//     console.log(`✅ Listicle server running at http://localhost:${PORT}`);
-// });
-
-
 // server.cjs
 const path = require('path');
 const fs = require('fs');
 const express = require('express');
+const cors = require('cors');
 require('dotenv').config();
 const pool = require('./db/pool');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Static files
+// ===========================
+// Middleware & static assets
+// ===========================
+app.use(cors()); // allow React client (Vite) to call this API
 app.use(express.static(path.join(__dirname, 'public')));
 
-// --- Minimal templating: replaces {{key}} with values ---
+// ===========================
+// Utilities
+// ===========================
+const fmtCurrency = (n) =>
+    n == null ? '—' : Number(n) === 0 ? 'Free' : `$${Number(n).toFixed(2)}`;
+const fmtDateTime = (iso) => (iso ? new Date(iso).toLocaleString() : 'TBA');
+
+const slugify = (s = '') =>
+    String(s)
+        .toLowerCase()
+        .trim()
+        .replace(/&/g, ' and ')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
+
+// 2-letter state code -> full name (used by /api/states)
+function stateName(code) {
+    const map = {
+        AL: 'Alabama', AK: 'Alaska', AZ: 'Arizona', AR: 'Arkansas', CA: 'California', CO: 'Colorado',
+        CT: 'Connecticut', DE: 'Delaware', FL: 'Florida', GA: 'Georgia', HI: 'Hawaii', ID: 'Idaho',
+        IL: 'Illinois', IN: 'Indiana', IA: 'Iowa', KS: 'Kansas', KY: 'Kentucky', LA: 'Louisiana',
+        ME: 'Maine', MD: 'Maryland', MA: 'Massachusetts', MI: 'Michigan', MN: 'Minnesota', MS: 'Mississippi',
+        MO: 'Missouri', MT: 'Montana', NE: 'Nebraska', NV: 'Nevada', NH: 'New Hampshire', NJ: 'New Jersey',
+        NM: 'New Mexico', NY: 'New York', NC: 'North Carolina', ND: 'North Dakota', OH: 'Ohio', OK: 'Oklahoma',
+        OR: 'Oregon', PA: 'Pennsylvania', RI: 'Rhode Island', SC: 'South Carolina', SD: 'South Dakota',
+        TN: 'Tennessee', TX: 'Texas', UT: 'Utah', VT: 'Vermont', VA: 'Virginia', WA: 'Washington',
+        WV: 'West Virginia', WI: 'Wisconsin', WY: 'Wyoming', DC: 'District of Columbia'
+    };
+    return map[String(code).toUpperCase()] || code;
+}
+
+// ===========================
+// Minimal templating for SSR
+// ===========================
 function render(filePath, data = {}) {
     let html = fs.readFileSync(filePath, 'utf8');
     for (const [k, v] of Object.entries(data)) {
@@ -140,25 +57,20 @@ function render(filePath, data = {}) {
     return html;
 }
 
-// --- Wrap a view with the layout and allow per-page CSS injection ---
 function withLayout({ title, description = '', body, pageStyles = '' }) {
     const layoutPath = path.join(__dirname, 'views', 'layout.html');
     return render(layoutPath, { title, description, body, pageStyles });
 }
 
-// Helpers
-const fmtCurrency = (n) =>
-    n == null ? '—' : Number(n) === 0 ? 'Free' : `$${Number(n).toFixed(2)}`;
-const fmtDateTime = (iso) =>
-    iso ? new Date(iso).toLocaleString() : 'TBA';
+// ===========================
+// SSR PAGES (your existing UI)
+// ===========================
 
-// Home (list) with optional ?q= search (server-side)
-// Client-side genre filter (select#genre) uses data-genres on cards.
+// Home (list) with optional ?q= search
 app.get(['/', '/events'], async (req, res, next) => {
     try {
         const { q } = req.query;
 
-        // Build search WHERE clause
         const params = [];
         const where = [];
         if (q) {
@@ -169,14 +81,15 @@ app.get(['/', '/events'], async (req, res, next) => {
         }
         const whereSql = where.length ? `WHERE ${where.join(' AND ')}` : '';
 
-        // Query rows to display
         const { rows } = await pool.query(
             `SELECT * FROM events ${whereSql} ORDER BY starts_at NULLS LAST, name ASC`,
             params
         );
 
-        // Build genre options from ALL rows in the table (so dropdown is stable regardless of q)
-        const allGenreRows = await pool.query('SELECT genre FROM events WHERE genre IS NOT NULL');
+        // Build genre dropdown from entire table (stable set)
+        const allGenreRows = await pool.query(
+            'SELECT genre FROM events WHERE genre IS NOT NULL'
+        );
         const allGenres = [
             ...new Set(
                 allGenreRows.rows
@@ -185,11 +98,8 @@ app.get(['/', '/events'], async (req, res, next) => {
             ),
         ].sort();
 
-        const genreOptions = allGenres
-            .map(g => `<option value="${g}">${g}</option>`)
-            .join('');
+        const genreOptions = allGenres.map(g => `<option value="${g}">${g}</option>`).join('');
 
-        // Build cards markup that matches your CSS selectors
         const cards = rows.map(e => {
             const genresArr = (e.genre || '').split(',').map(s => s.trim()).filter(Boolean);
             const chips = genresArr.map(g => `<span class="chip">${g}</span>`).join(' ');
@@ -213,14 +123,10 @@ app.get(['/', '/events'], async (req, res, next) => {
       </article>`;
         }).join('');
 
-        // Render home view
         const homePath = path.join(__dirname, 'views', 'home.html');
-        let body = render(homePath, {
-            list: cards,
-            genreOptions, // used by the <select> in home.html
-        });
+        let body = render(homePath, { list: cards, genreOptions });
 
-        // Attach lightweight client-side genre filter (show/hide cards)
+        // client-side genre filter
         body += `
 <script>
   (function(){
@@ -237,7 +143,6 @@ app.get(['/', '/events'], async (req, res, next) => {
   })();
 </script>`;
 
-        // Send with page-specific CSS so grid = 3 per row etc.
         res.send(
             withLayout({
                 title: 'SoundScout: Local Live Music',
@@ -251,7 +156,7 @@ app.get(['/', '/events'], async (req, res, next) => {
     }
 });
 
-// Detail page (keys must match views/detail.html placeholders)
+// Detail page for a single event
 app.get('/events/:slug', async (req, res, next) => {
     try {
         const { rows } = await pool.query('SELECT * FROM events WHERE slug = $1', [req.params.slug]);
@@ -289,18 +194,32 @@ app.get('/events/:slug', async (req, res, next) => {
     }
 });
 
-// JSON API
+// ===========================
+// JSON API (for React client)
+// ===========================
+
+// EVENTS: supports ?q=, ?city=, ?state=
 app.get('/api/events', async (req, res, next) => {
     try {
-        const { q } = req.query;
+        const { q, city, state } = req.query;
         const params = [];
         const where = [];
+
         if (q) {
             params.push(`%${q}%`);
             where.push(
                 `(slug ILIKE $${params.length} OR name ILIKE $${params.length} OR artists ILIKE $${params.length} OR venue ILIKE $${params.length} OR city ILIKE $${params.length} OR genre ILIKE $${params.length})`
             );
         }
+        if (city) {
+            params.push(city);
+            where.push(`COALESCE(city, 'Unknown') = $${params.length}`);
+        }
+        if (state) {
+            params.push(String(state).toUpperCase());
+            where.push(`UPPER(COALESCE(state, '')) = $${params.length}`);
+        }
+
         const whereSql = where.length ? `WHERE ${where.join(' AND ')}` : '';
         const { rows } = await pool.query(
             `SELECT * FROM events ${whereSql} ORDER BY starts_at NULLS LAST, name ASC`,
@@ -321,23 +240,128 @@ app.get('/api/events/:slug', async (req, res, next) => {
         next(err);
     }
 });
-// 404 handler (for both HTML and JSON requests)
+
+// LOCATIONS: derived from events.city (no separate locations table required)
+app.get('/api/locations', async (_req, res, next) => {
+    try {
+        const { rows } = await pool.query(`
+      SELECT
+        COALESCE(city, 'Unknown') AS city,
+        COUNT(*) AS event_count,
+        MIN(starts_at) FILTER (WHERE starts_at >= NOW()) AS next_event
+      FROM events
+      GROUP BY city
+      ORDER BY city ASC
+    `);
+
+        const payload = rows.map(r => ({
+            slug: slugify(r.city || 'unknown'),
+            name: r.city || 'Unknown',
+            city: r.city || 'Unknown',
+            count: Number(r.event_count) || 0,
+            next_event: r.next_event ? new Date(r.next_event).toISOString() : null,
+        }));
+
+        res.json(payload);
+    } catch (err) {
+        next(err);
+    }
+});
+
+app.get('/api/locations/:slug', async (req, res, next) => {
+    try {
+        const { rows: cities } = await pool.query(
+            `SELECT DISTINCT COALESCE(city, 'Unknown') AS city FROM events`
+        );
+        const match = cities.find(c => slugify(c.city) === req.params.slug);
+        if (!match) return res.status(404).json({ error: 'Location not found' });
+
+        const cityName = match.city;
+        const { rows: events } = await pool.query(
+            `SELECT * FROM events WHERE COALESCE(city, 'Unknown') = $1
+       ORDER BY starts_at NULLS LAST, name ASC`,
+            [cityName]
+        );
+
+        res.json({
+            slug: slugify(cityName),
+            name: cityName,
+            events,
+        });
+    } catch (err) {
+        next(err);
+    }
+});
+
+// STATES (US map): coloring & drill-down
+
+// GET /api/states -> [{ state:'CA', name:'California', count: 7, cities:[...] }]
+app.get('/api/states', async (_req, res, next) => {
+    try {
+        const { rows } = await pool.query(`
+      SELECT
+        UPPER(state) AS state,
+        COUNT(*) AS event_count,
+        ARRAY_AGG(DISTINCT COALESCE(city, 'Unknown')) AS cities
+      FROM events
+      WHERE state IS NOT NULL AND state <> ''
+      GROUP BY UPPER(state)
+      ORDER BY UPPER(state)
+    `);
+
+        const payload = rows.map(r => ({
+            state: r.state,
+            name: stateName(r.state),
+            count: Number(r.event_count) || 0,
+            cities: r.cities || []
+        }));
+
+        res.json(payload);
+    } catch (err) {
+        next(err);
+    }
+});
+
+// GET /api/states/:code -> { state, name, cities:[{name,count}], events:[...] }
+app.get('/api/states/:code', async (req, res, next) => {
+    try {
+        const code = String(req.params.code || '').toUpperCase();
+        const { rows: events } = await pool.query(
+            `SELECT * FROM events WHERE UPPER(state) = $1 ORDER BY starts_at NULLS LAST, name ASC`,
+            [code]
+        );
+
+        const byCity = {};
+        for (const e of events) {
+            const c = e.city || 'Unknown';
+            byCity[c] = (byCity[c] || 0) + 1;
+        }
+        const cities = Object.entries(byCity)
+            .map(([name, count]) => ({ name, count }))
+            .sort((a, b) => a.name.localeCompare(b.name));
+
+        res.json({
+            state: code,
+            name: stateName(code),
+            cities,
+            events
+        });
+    } catch (err) {
+        next(err);
+    }
+});
+
+// ===========================
+// 404 + Error handlers
+// ===========================
 app.use((req, res) => {
     const wantsJson = req.path.startsWith('/api') || (req.accepts('json') && !req.accepts('html'));
-    const isAsset = Boolean(path.extname(req.path)); // e.g. .png, .css, .js
+    const isAsset = Boolean(path.extname(req.path));
 
-    if (wantsJson) {
-        return res.status(404).json({ error: 'Not found' });
-    }
+    if (wantsJson) return res.status(404).json({ error: 'Not found' });
+    if (isAsset) return res.sendStatus(404);
 
-    if (isAsset) {
-        // Missing images/CSS/JS should be a bare 404 so they don't render as overlays
-        return res.sendStatus(404);
-    }
-
-    // Pretty HTML 404 for page routes
     const layoutPath = path.join(__dirname, 'views', 'layout.html');
-    // If you have withLayout(), you can use it; otherwise inline render:
     const body = `
     <section style="text-align:center">
       <img src="/404.svg" alt="Not found" style="max-width:320px;width:100%;margin:1rem auto;"/>
@@ -345,10 +369,6 @@ app.use((req, res) => {
     </section>
   `;
 
-    // If you already have withLayout({ title, body, pageStyles }), use that:
-    // return res.status(404).send(withLayout({ title: 'Not found', body }));
-
-    // Minimal render using your existing render() helper:
     const html = (function render(filePath, data = {}) {
         let html = require('fs').readFileSync(filePath, 'utf8');
         for (const [k, v] of Object.entries(data)) {
@@ -360,10 +380,12 @@ app.use((req, res) => {
     return res.status(404).send(html);
 });
 
-// Error handler
 app.use((err, _req, res, _next) => {
     console.error(err);
     res.status(500).send('<pre>Server error. Check logs.</pre>');
 });
 
-app.listen(PORT, () => console.log(`✓ http://localhost:${PORT}`));
+// ===========================
+// Start server
+// ===========================
+app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
