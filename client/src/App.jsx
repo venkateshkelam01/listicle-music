@@ -10,7 +10,6 @@ export default function App() {
           <p className="muted">Explore events by location — city or state</p>
           <nav style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             <Link to="/">Home</Link>
-            <Link to="/us">US Map</Link>
           </nav>
         </div>
       </header>

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchState } from "../services/api";
 
+
 function EventCard({ e }) {
     const starts = e.starts_at ? new Date(e.starts_at) : null;
     const now = new Date();
@@ -49,9 +50,7 @@ export default function StateDetailPage() {
 
     return (
         <>
-            <nav style={{ marginBottom: '1rem' }}>
-                <Link to="/us">← US map</Link>
-            </nav>
+
 
             <h2 style={{ marginTop: 0 }}>{data.name} ({data.state})</h2>
             <p className="muted">

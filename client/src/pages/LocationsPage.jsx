@@ -1,45 +1,83 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { fetchLocations } from '../services/api'
+// client/src/pages/LocationsPage.jsx
+import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { fetchStates } from "../services/api";
+import USMap from "../components/USMap";
+
 
 export default function LocationsPage() {
-    const [locations, setLocations] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState('')
+    const [rows, setRows] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
     useEffect(() => {
-        fetchLocations()
-            .then(setLocations)
+        fetchStates()
+            .then(setRows)
             .catch(e => setError(e.message))
-            .finally(() => setLoading(false))
-    }, [])
+            .finally(() => setLoading(false));
+    }, []);
 
-    if (loading) return <p>Loading locations…</p>
-    if (error) return <p style={{ color: 'tomato' }}>Error: {error}</p>
+    const stateCounts = useMemo(() => {
+        const map = {};
+        for (const r of rows) map[String(r.state).toUpperCase()] = r.count || 0;
+        return map;
+    }, [rows]);
 
     return (
-        <section className="grid" style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-            gap: '1rem'
-        }}>
-            {locations.map(loc => (
-                <Link key={loc.slug} to={`/locations/${loc.slug}`} style={{
-                    display: 'block',
-                    textDecoration: 'none',
-                    border: '1px solid #333',
-                    padding: '1rem',
-                    borderRadius: '12px'
-                }}>
-                    <h3 style={{ margin: '0 0 .25rem' }}>{loc.name}</h3>
-                    <p style={{ opacity: .75, margin: 0 }}>{loc.count} events</p>
-                    {loc.next_event && (
-                        <small style={{ opacity: .7 }}>
-                            Next: {new Date(loc.next_event).toLocaleString()}
-                        </small>
+        <>
+            {/* HERO */}
+            <section className="hero">
+                <div className="hero-overlay">
+                    <h2>Find your next event</h2>
+                    <p className="muted">
+                        Click a state to explore city events, lineups, and details.
+                    </p>
+                </div>
+            </section>
+
+            {/* US section with single background image UNDER both map & tabs */}
+            <section className="us-bg-section">
+                <div className="us-bg-inner">
+                    <h3 className="section-title">United States</h3>
+
+                    {loading ? (
+                        <p>Loading map…</p>
+                    ) : error ? (
+                        <p style={{ color: "tomato" }}>Error: {error}</p>
+                    ) : (
+                        <>
+                            {/* Map sits over the same background */}
+                            <div className="map-on-bg">
+                                <USMap stateCounts={stateCounts} />
+                            </div>
+
+                            <p className="muted legend">Green: has events · Red: no events</p>
+
+                            {/* “State tabs” — still linked cards, now also over the background */}
+                            <div className="state-tabs">
+                                <div className="grid">
+                                    {rows.map(r => (
+                                        <Link
+                                            key={r.state}
+                                            to={`/states/${r.state}`}
+                                            className="card link-card"
+                                        >
+                                            <div className="card-body">
+                                                <h4>
+                                                    {r.name} ({r.state})
+                                                </h4>
+                                                <p className="muted">
+                                                    {r.count} events · {r.cities.length} cities
+                                                </p>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div>
+                        </>
                     )}
-                </Link>
-            ))}
-        </section>
-    )
+                </div>
+            </section>
+        </>
+    );
 }
