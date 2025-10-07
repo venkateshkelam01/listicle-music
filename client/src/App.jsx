@@ -9,7 +9,8 @@ export default function App() {
           <h1>Virtual Community Space</h1>
           <p className="muted">Explore events by location — city or state</p>
           <nav style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <Link to="/">Home</Link>
+            <Link to="/" className="home-btn-main">Home</Link>
+
           </nav>
         </div>
       </header>

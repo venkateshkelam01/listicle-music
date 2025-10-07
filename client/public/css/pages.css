@@ -1,0 +1,91 @@
+/* ===== Country Detail Page Custom Look ===== */
+.country-page {
+    position: relative;
+    min-height: 100vh;
+    color: #fff;
+    background: transparent;
+    overflow: hidden;
+}
+
+/* Hide global header/footer only inside country pages */
+.country-page header,
+.country-page .site-header,
+.country-page footer,
+.country-page .site-footer {
+    display: none !important;
+}
+
+/* Cinematic concert background for ALL countries */
+.country-page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(0, 0, 0, .18), rgba(0, 0, 0, .30)),
+        url("https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2400&auto=format&fit=crop");
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    animation: bgZoom 40s ease-in-out infinite alternate;
+}
+
+/* Glassmorphism for cards so background is visible under tabs */
+.country-page .card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px) saturate(130%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    transition: all 0.2s ease;
+}
+
+.country-page .card:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+}
+
+.country-page .card-body {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.country-page .muted {
+    color: rgba(255, 255, 255, 0.82);
+}
+
+/* Keep layout container transparent */
+.country-page .inner {
+    background: transparent;
+    backdrop-filter: none;
+    border-radius: 0;
+    padding: 2rem 0;
+    box-shadow: none;
+}
+
+/* Also ensure global overlay never shows under a country page */
+.country-page body::before,
+.country-page::before body::before {
+    display: none !important;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+    .hero {
+        min-height: 260px;
+    }
+
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+
+    .section-title {
+        font-size: 1.25rem;
+    }
+
+    .home-btn {
+        top: .9rem;
+        left: .9rem;
+        padding: .6rem .9rem;
+        font-size: .9rem;
+    }
+}

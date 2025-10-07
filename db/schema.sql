@@ -10,7 +10,9 @@ CREATE TABLE events (
     starts_at TIMESTAMP,
     venue TEXT,
     city TEXT,
-    state TEXT, -- Added for US map functionality
+    state TEXT,          
+    country TEXT,        
+    region TEXT,        
     genre TEXT,
     price NUMERIC(10,2),
     image TEXT,

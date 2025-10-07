@@ -20,7 +20,7 @@ export async function fetchEventsByCity(city) {
     return res.json();
 }
 
-// ==== NEW: States API for US map ====
+// ===== States (US) =====
 export async function fetchStates() {
     const res = await fetch(`${API}/api/states`);
     if (!res.ok) throw new Error('Failed to load states');
@@ -30,5 +30,18 @@ export async function fetchStates() {
 export async function fetchState(code) {
     const res = await fetch(`${API}/api/states/${code}`);
     if (!res.ok) throw new Error('State not found');
+    return res.json();
+}
+
+// ===== Countries (World)  ***************
+export async function fetchCountries() {
+    const res = await fetch(`${API}/api/countries`);
+    if (!res.ok) throw new Error('Failed to load countries');
+    return res.json();
+}
+
+export async function fetchCountry(code) {
+    const res = await fetch(`${API}/api/countries/${code}`);
+    if (!res.ok) throw new Error('Country not found');
     return res.json();
 }

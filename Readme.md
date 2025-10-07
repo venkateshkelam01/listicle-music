@@ -1,49 +1,87 @@
-# WEB103 Project 1 - *SoundScout*
+# WEB103 Project 3 - Virtual Community Space 🎸
 
 Submitted by: **Venkatesh Kelam**
 
-About this web app: **SoundScout** helps students discover local live music—open mics, indie shows, jazz nights, and club DJs—around the South Bay / Bay Area. Browse event cards on the home page, filter by genre, and click into a dedicated detail page for full info (artists, venue, date/time, ticket price, etc.). Built with **vanilla HTML/CSS/JS** on an **Express** server and styled with **Pico.css**.
+About this web app: This app helps users explore live events around the world by interacting with a visual world map. Users can click on regions (e.g., Americas, Africa, Asia, Australia), drill down to specific countries and states, and view upcoming events categorized by location. The app is built with React on the frontend and Express + PostgreSQL on the backend, and supports full API access, dynamic SVG maps, and location-based routing.
 
-Time spent: **5** hours
+Time spent: **10** hours
 
-## Required Features
+---
+
+## ✅ Required Features
 
 The following **required** functionality is completed:
 
-- [x] **The web app uses only HTML, CSS, and JavaScript without a frontend framework**  
-- [x] **The web app displays a title**  
-- [x] **The web app displays at least five unique list items, each with at least three displayed attributes (such as title, text, and image)**  
-- [x] **The user can click on each item in the list to see a detailed view of it, including all database fields**  
-  - [x] **Each detail view has a unique endpoint**, e.g. `http://localhost:3000/events/indigo-kitchen-2025-10-03`  
-  - *In the GIF, the unique URL is visible in the address bar.*  
-- [x] **The web app serves an appropriate 404 page when no matching route is defined**  
-- [x] **The web app is styled using Picocss**
+- [x] **The web app uses React to display data from the API**
+- [x] **The web app is connected to a PostgreSQL database, with an appropriately structured Events table**
+  - [x]  **Walkthrough includes a view of my Render dashboard showing the Postgres database is running**
+  - [x]  **Walkthrough includes a terminal screenshot with `SELECT * FROM events;` showing table contents**
+- [x] **The web app displays a title**
+- [x] **Website includes a visual interface that allows users to select a location**
+  - [x] *Interactive world map with clickable regions (SVG polygons), not just links*
+- [x] **Each location has a detail page with its own unique URL**
+- [x] **Clicking a location navigates to its detail page and shows events filtered by location**
 
-## ✨ Optional / Stretch Features
+---
 
-- [x] Card layout with hover elevation/animation (instead of a plain list)  
-- [x] **Hero header** (full-bleed banner image, large title/subtitle, right-aligned **ALL CATEGORIES** button)  
-- [x] Client-side **genre filter** (dropdown; instant show/hide)  
-- [x] **Per-page CSS** (clean separation: `base.css`, `components.css`, `home.css`, `detail.css`)  
-- [x] Detail image constraints (**max 650×750px**, fluid down on small screens)  
-- [x] **Dark theme** using Pico’s dark palette + true-black background
+## 🌟 Optional Features
 
-## Video Walkthrough
+The following **optional** features are implemented:
 
-**Note: please be sure to 
+- [x] Additional page shows **all events** (`/events`)
+  - [x] Users can **filter** events by genre and location (through dropdowns and search input)
+- [x] Events show countdown or indicate when the event has passed
+  - [x] Past events display with a **"Event passed"** label in a faded style
+- [x] Country and state-level drill-downs with **dynamic routes**
+  - [x] `/countries/US`, `/states/CA`, etc.
 
-Here's a walkthrough of implemented required features:
+---
+
+## 🚀 Additional Features
+
+The following **additional** features are implemented:
+
+- [x] Full SSR (Server-Side Rendering) for `/`, `/events`, and `/events/:slug`
+- [x] Clean project structure with proper **Separation of Concerns**
+- [x] Reusable utility functions like `slugify()`, `fmtCurrency()`, and `fmtDateTime()`
+- [x] **Interactive SVG world map** with live hover and region detection
+- [x] Styled UI using modular CSS (`base.css`, `components.css`, etc.)
+- [x] Home button consistently placed across pages (`← Home`)
+- [x] Custom 404 page with image and call-to-action
+
+---
+
+## 📹 Video Walkthrough
+
+Here’s a walkthrough of the implemented features:
+
+<img src='' title='Video Walkthrough' width='100%' alt='Video Walkthrough' />
 
 
-Video created with **loom**
-https://www.loom.com/share/11fe1bb992134dd4b363b6f782cbe418
+---
 
+## 📝 Notes
 
-## License
+**Challenges encountered:**
 
-Copyright [2025] [Venkatesh Kelam]
+- Positioning the world map SVG polygons accurately over the background image to align with real continents.
+- Creating reusable SSR-friendly rendering logic that supports layout injection and metadata dynamically.
+- Managing multiple levels of filtering (genre, location, search) while preserving UX.
+- Keeping CSS overlays transparent but still legible with multiple layers (e.g., on country detail pages).
 
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+**Learnings:**
+
+- How to build full-stack apps with dynamic routing, SSR, and REST APIs
+- SVG polygon mapping and event delegation in React
+- Styling pages with layered backgrounds and accessibility in mind
+
+---
+
+## 📄 License
+
+Copyright 2025 Venkatesh Kelam
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at:
 
 > http://www.apache.org/licenses/LICENSE-2.0
 
