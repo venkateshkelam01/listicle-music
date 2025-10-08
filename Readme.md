@@ -55,7 +55,7 @@ The following **additional** features are implemented:
 
 Here’s a walkthrough of the implemented features:
 
-<img src='https://www.loom.com/share/f7084be7631443339d688e86376df32d' title='Video Walkthrough' width='100%' alt='Video Walkthrough' />
+<img src='https://www.loom.com/share/f7084be7631443339d688e86376df32d.gif' title='Video Walkthrough' width='100%' alt='Video Walkthrough' />
 
 
 ---
