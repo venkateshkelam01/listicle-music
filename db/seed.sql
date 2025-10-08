@@ -74,7 +74,6 @@ VALUES
 ('za-cape-town-jazz-2025-10-18','Cape Town Jazz','Table Bay Trio','2025-10-18 19:00:00','The Crypt','Cape Town',NULL,'ZA','Jazz',20,
 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1600&auto=format&fit=crop','Jazz under Table Mountain.','seed'),
 ('za-johannesburg-afrobeats-2025-10-21','Jozi Afrobeats Night','ZuluSound','2025-10-21 20:30:00','Great Dane','Johannesburg',NULL,'ZA','Afrobeats',18,
-'https://images.unsplash.com/photo-1526476148966-98bd039463ea?q=80&w=1600&auto=format&fit=crop','Afrobeats & dancehall mix.','seed');
+'https://images.unsplash.com/photo-1526476148966-98bd039463ea?q=80&w=1600&auto=format&fit=crop','Afrobeats & dancehall mix.','seed')
 
--- Ensure idempotency when reseeding
 ON CONFLICT (slug) DO NOTHING;

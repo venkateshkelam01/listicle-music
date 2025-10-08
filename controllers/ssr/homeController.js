@@ -1,5 +1,5 @@
 const path = require('path');
-const pool = require('../../../db/pool');
+const pool = require('../../db/pool');
 const { render, withLayout } = require('../../utils/helpers');
 const { fmtCurrency, fmtDateTime } = require('../../utils/formatters');
 

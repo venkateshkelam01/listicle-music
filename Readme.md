@@ -55,7 +55,7 @@ The following **additional** features are implemented:
 
 Here’s a walkthrough of the implemented features:
 
-<img src='' title='Video Walkthrough' width='100%' alt='Video Walkthrough' />
+<img src='https://github.com/venkateshkelam01/listicle-music/tree/week3' title='Video Walkthrough' width='100%' alt='Video Walkthrough' />
 
 
 ---
