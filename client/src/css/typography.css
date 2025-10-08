@@ -1,0 +1,19 @@
+/* ===== Typography & Links ===== */
+a {
+    color: #cbb9ff;
+    text-decoration: none;
+    transition: color .2s ease;
+}
+
+a:hover {
+    color: #e0d6ff;
+}
+
+.muted {
+    color: rgba(255, 255, 255, .7);
+}
+
+.inner {
+    width: min(1100px, 92vw);
+    margin: 0 auto;
+}

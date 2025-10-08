@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 520 280"
+  role="img"
+  aria-label="United States tile map (states coded by two-letter IDs)"
+>
+  <title>United States Tile Map</title>
+  <desc>
+    A tile cartogram of U.S. states. Each state is a rectangle (36x36) with a two-letter ID.
+    Intended for coloring (fill) and click handlers by external code. Includes DC.
+  </desc>
+
+  <style>
+    .tile { fill: #d1d5db; stroke: #111827; stroke-width: 1; rx: 5; ry: 5; }
+    .code { font: 700 10px system-ui, -apple-system, Segoe UI, Roboto, sans-serif; fill: #111827; text-anchor: middle; dominant-baseline: middle; }
+    .hint { fill: #6b7280; font: 400 11px system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+  </style>
+
+  <!-- Grid/tile metrics: tile 36x36, gap 4, unit=40 -->
+  <!-- Rows are arranged by general region; not geographic outlines (tile cartogram) -->
+  <!-- Your app will update tile fills based on event counts and attach click handlers -->
+
+  <!-- Row 0 -->
+  <g id="WA" transform="translate(0,0)">
+    <rect class="tile" id="WA" width="36" height="36" x="2" y="2"/><title>Washington</title>
+    <text class="code" x="20" y="20">WA</text>
+  </g>
+  <g id="MT" transform="translate(40,0)">
+    <rect class="tile" id="MT" width="36" height="36" x="2" y="2"/><title>Montana</title>
+    <text class="code" x="60" y="20">MT</text>
+  </g>
+  <g id="ND" transform="translate(80,0)">
+    <rect class="tile" id="ND" width="36" height="36" x="2" y="2"/><title>North Dakota</title>
+    <text class="code" x="100" y="20">ND</text>
+  </g>
+  <g id="MN" transform="translate(120,0)">
+    <rect class="tile" id="MN" width="36" height="36" x="2" y="2"/><title>Minnesota</title>
+    <text class="code" x="140" y="20">MN</text>
+  </g>
+  <g id="WI" transform="translate(160,0)">
+    <rect class="tile" id="WI" width="36" height="36" x="2" y="2"/><title>Wisconsin</title>
+    <text class="code" x="180" y="20">WI</text>
+  </g>
+  <g id="MI" transform="translate(200,0)">
+    <rect class="tile" id="MI" width="36" height="36" x="2" y="2"/><title>Michigan</title>
+    <text class="code" x="220" y="20">MI</text>
+  </g>
+  <g id="VT" transform="translate(280,0)">
+    <rect class="tile" id="VT" width="36" height="36" x="2" y="2"/><title>Vermont</title>
+    <text class="code" x="300" y="20">VT</text>
+  </g>
+  <g id="NH" transform="translate(320,0)">
+    <rect class="tile" id="NH" width="36" height="36" x="2" y="2"/><title>New Hampshire</title>
+    <text class="code" x="340" y="20">NH</text>
+  </g>
+  <g id="ME" transform="translate(360,0)">
+    <rect class="tile" id="ME" width="36" height="36" x="2" y="2"/><title>Maine</title>
+    <text class="code" x="380" y="20">ME</text>
+  </g>
+
+  <!-- Row 1 -->
+  <g id="OR" transform="translate(0,40)">
+    <rect class="tile" id="OR" width="36" height="36" x="2" y="2"/><title>Oregon</title>
+    <text class="code" x="20" y="60">OR</text>
+  </g>
+  <g id="ID" transform="translate(40,40)">
+    <rect class="tile" id="ID" width="36" height="36" x="2" y="2"/><title>Idaho</title>
+    <text class="code" x="60" y="60">ID</text>
+  </g>
+  <g id="SD" transform="translate(80,40)">
+    <rect class="tile" id="SD" width="36" height="36" x="2" y="2"/><title>South Dakota</title>
+    <text class="code" x="100" y="60">SD</text>
+  </g>
+  <g id="IA" transform="translate(120,40)">
+    <rect class="tile" id="IA" width="36" height="36" x="2" y="2"/><title>Iowa</title>
+    <text class="code" x="140" y="60">IA</text>
+  </g>
+  <g id="IL" transform="translate(160,40)">
+    <rect class="tile" id="IL" width="36" height="36" x="2" y="2"/><title>Illinois</title>
+    <text class="code" x="180" y="60">IL</text>
+  </g>
+  <g id="IN" transform="translate(200,40)">
+    <rect class="tile" id="IN" width="36" height="36" x="2" y="2"/><title>Indiana</title>
+    <text class="code" x="220" y="60">IN</text>
+  </g>
+  <g id="OH" transform="translate(240,40)">
+    <rect class="tile" id="OH" width="36" height="36" x="2" y="2"/><title>Ohio</title>
+    <text class="code" x="260" y="60">OH</text>
+  </g>
+  <g id="PA" transform="translate(280,40)">
+    <rect class="tile" id="PA" width="36" height="36" x="2" y="2"/><title>Pennsylvania</title>
+    <text class="code" x="300" y="60">PA</text>
+  </g>
+  <g id="NY" transform="translate(320,40)">
+    <rect class="tile" id="NY" width="36" height="36" x="2" y="2"/><title>New York</title>
+    <text class="code" x="340" y="60">NY</text>
+  </g>
+  <g id="MA" transform="translate(360,40)">
+    <rect class="tile" id="MA" width="36" height="36" x="2" y="2"/><title>Massachusetts</title>
+    <text class="code" x="380" y="60">MA</text>
+  </g>
+
+  <!-- Row 2 -->
+  <g id="CA" transform="translate(0,80)">
+    <rect class="tile" id="CA" width="36" height="36" x="2" y="2"/><title>California</title>
+    <text class="code" x="20" y="100">CA</text>
+  </g>
+  <g id="NV" transform="translate(40,80)">
+    <rect class="tile" id="NV" width="36" height="36" x="2" y="2"/><title>Nevada</title>
+    <text class="code" x="60" y="100">NV</text>
+  </g>
+  <g id="WY" transform="translate(80,80)">
+    <rect class="tile" id="WY" width="36" height="36" x="2" y="2"/><title>Wyoming</title>
+    <text class="code" x="100" y="100">WY</text>
+  </g>
+  <g id="NE" transform="translate(120,80)">
+    <rect class="tile" id="NE" width="36" height="36" x="2" y="2"/><title>Nebraska</title>
+    <text class="code" x="140" y="100">NE</text>
+  </g>
+  <g id="MO" transform="translate(160,80)">
+    <rect class="tile" id="MO" width="36" height="36" x="2" y="2"/><title>Missouri</title>
+    <text class="code" x="180" y="100">MO</text>
+  </g>
+  <g id="KY" transform="translate(200,80)">
+    <rect class="tile" id="KY" width="36" height="36" x="2" y="2"/><title>Kentucky</title>
+    <text class="code" x="220" y="100">KY</text>
+  </g>
+  <g id="WV" transform="translate(240,80)">
+    <rect class="tile" id="WV" width="36" height="36" x="2" y="2"/><title>West Virginia</title>
+    <text class="code" x="260" y="100">WV</text>
+  </g>
+  <g id="VA" transform="translate(280,80)">
+    <rect class="tile" id="VA" width="36" height="36" x="2" y="2"/><title>Virginia</title>
+    <text class="code" x="300" y="100">VA</text>
+  </g>
+  <g id="MD" transform="translate(320,80)">
+    <rect class="tile" id="MD" width="36" height="36" x="2" y="2"/><title>Maryland</title>
+    <text class="code" x="340" y="100">MD</text>
+  </g>
+  <g id="DE" transform="translate(360,80)">
+    <rect class="tile" id="DE" width="36" height="36" x="2" y="2"/><title>Delaware</title>
+    <text class="code" x="380" y="100">DE</text>
+  </g>
+  <g id="NJ" transform="translate(400,80)">
+    <rect class="tile" id="NJ" width="36" height="36" x="2" y="2"/><title>New Jersey</title>
+    <text class="code" x="420" y="100">NJ</text>
+  </g>
+  <g id="CT" transform="translate(440,80)">
+    <rect class="tile" id="CT" width="36" height="36" x="2" y="2"/><title>Connecticut</title>
+    <text class="code" x="460" y="100">CT</text>
+  </g>
+  <g id="RI" transform="translate(480,80)">
+    <rect class="tile" id="RI" width="36" height="36" x="2" y="2"/><title>Rhode Island</title>
+    <text class="code" x="500" y="100">RI</text>
+  </g>
+
+  <!-- Row 3 -->
+  <g id="AZ" transform="translate(40,120)">
+    <rect class="tile" id="AZ" width="36" height="36" x="2" y="2"/><title>Arizona</title>
+    <text class="code" x="60" y="140">AZ</text>
+  </g>
+  <g id="UT" transform="translate(80,120)">
+    <rect class="tile" id="UT" width="36" height="36" x="2" y="2"/><title>Utah</title>
+    <text class="code" x="100" y="140">UT</text>
+  </g>
+  <g id="CO" transform="translate(120,120)">
+    <rect class="tile" id="CO" width="36" height="36" x="2" y="2"/><title>Colorado</title>
+    <text class="code" x="140" y="140">CO</text>
+  </g>
+  <g id="KS" transform="translate(160,120)">
+    <rect class="tile" id="KS" width="36" height="36" x="2" y="2"/><title>Kansas</title>
+    <text class="code" x="180" y="140">KS</text>
+  </g>
+  <g id="AR" transform="translate(200,120)">
+    <rect class="tile" id="AR" width="36" height="36" x="2" y="2"/><title>Arkansas</title>
+    <text class="code" x="220" y="140">AR</text>
+  </g>
+  <g id="TN" transform="translate(240,120)">
+    <rect class="tile" id="TN" width="36" height="36" x="2" y="2"/><title>Tennessee</title>
+    <text class="code" x="260" y="140">TN</text>
+  </g>
+  <g id="NC" transform="translate(280,120)">
+    <rect class="tile" id="NC" width="36" height="36" x="2" y="2"/><title>North Carolina</title>
+    <text class="code" x="300" y="140">NC</text>
+  </g>
+  <g id="SC" transform="translate(320,120)">
+    <rect class="tile" id="SC" width="36" height="36" x="2" y="2"/><title>South Carolina</title>
+    <text class="code" x="340" y="140">SC</text>
+  </g>
+  <g id="DC" transform="translate(360,120)">
+    <rect class="tile" id="DC" width="36" height="36" x="2" y="2"/><title>District of Columbia</title>
+    <text class="code" x="380" y="140">DC</text>
+  </g>
+
+  <!-- Row 4 -->
+  <g id="NM" transform="translate(80,160)">
+    <rect class="tile" id="NM" width="36" height="36" x="2" y="2"/><title>New Mexico</title>
+    <text class="code" x="100" y="180">NM</text>
+  </g>
+  <g id="OK" transform="translate(120,160)">
+    <rect class="tile" id="OK" width="36" height="36" x="2" y="2"/><title>Oklahoma</title>
+    <text class="code" x="140" y="180">OK</text>
+  </g>
+  <g id="TX" transform="translate(160,160)">
+    <rect class="tile" id="TX" width="36" height="36" x="2" y="2"/><title>Texas</title>
+    <text class="code" x="180" y="180">TX</text>
+  </g>
+  <g id="LA" transform="translate(200,160)">
+    <rect class="tile" id="LA" width="36" height="36" x="2" y="2"/><title>Louisiana</title>
+    <text class="code" x="220" y="180">LA</text>
+  </g>
+  <g id="MS" transform="translate(240,160)">
+    <rect class="tile" id="MS" width="36" height="36" x="2" y="2"/><title>Mississippi</title>
+    <text class="code" x="260" y="180">MS</text>
+  </g>
+  <g id="AL" transform="translate(280,160)">
+    <rect class="tile" id="AL" width="36" height="36" x="2" y="2"/><title>Alabama</title>
+    <text class="code" x="300" y="180">AL</text>
+  </g>
+  <g id="GA" transform="translate(320,160)">
+    <rect class="tile" id="GA" width="36" height="36" x="2" y="2"/><title>Georgia</title>
+    <text class="code" x="340" y="180">GA</text>
+  </g>
+  <g id="FL" transform="translate(360,160)">
+    <rect class="tile" id="FL" width="36" height="36" x="2" y="2"/><title>Florida</title>
+    <text class="code" x="380" y="180">FL</text>
+  </g>
+
+  <!-- Row 5 -->
+  <g id="AK" transform="translate(0,200)">
+    <rect class="tile" id="AK" width="36" height="36" x="2" y="2"/><title>Alaska</title>
+    <text class="code" x="20" y="220">AK</text>
+  </g>
+  <g id="HI" transform="translate(40,200)">
+    <rect class="tile" id="HI" width="36" height="36" x="2" y="2"/><title>Hawaii</title>
+    <text class="code" x="60" y="220">HI</text>
+  </g>
+</svg>

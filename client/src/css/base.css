@@ -1,0 +1,49 @@
+/* ===== Global Theme Setup ===== */
+:root {
+    color-scheme: dark;
+}
+
+/* ===== Base ===== */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #fff;
+    line-height: 1.45;
+    background: #000;
+    /* Home stays pure black */
+    overflow-x: hidden;
+}
+
+/* Global background overlay (HOME & regular pages) — keep it dark & subtle */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, .7), rgba(0, 0, 0, .85));
+    z-index: -1;
+}
+
+/* When CountryDetailPage mounts, add body.country-active to disable the global overlay */
+body.country-active::before {
+    display: none !important;
+}
+
+@keyframes bgZoom {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.04);
+    }
+}
